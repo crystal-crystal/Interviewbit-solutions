@@ -1,0 +1,33 @@
+<!--Given an array A of N integers, find three integers in A such that the sum is closest to a given number B. Return the sum of those three integers.
+Assume that there will only be one solution. -->
+
+#include<bits/stdc++.h>
+int Solution::threeSumClosest(vector<int> &A, int B) {
+    int n = A.size();
+    if(n <=2)
+    return 0;
+    sort(A.begin(),A.end());
+    int res;
+    int ans = INT_MAX;
+    for(int i = 0;i<n-2;i++){
+        int left = i+1, right = n-1;
+        while(left<right){
+            long sum = A[i]+A[left]+A[right];
+            if(sum == B){
+                return sum;
+            }
+            else if(sum < B)
+            {  if( abs(sum-B) < ans)
+                {ans = abs(sum-B);
+                res = sum;
+                }
+                left++;
+            }else if(sum > B)
+            {
+                right--;
+            }
+        }
+    }
+    return res;
+}
+
