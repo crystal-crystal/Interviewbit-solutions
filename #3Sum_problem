@@ -17,8 +17,8 @@ int Solution::threeSumClosest(vector<int> &A, int B) {
                 return sum;
             }
             else if(sum < B)
-            {  if( abs(sum-B) < ans)
-                {ans = abs(sum-B);
+            {  if( B - sum < ans)
+                {ans = B - sum;
                 res = sum;
                 }
                 left++;
