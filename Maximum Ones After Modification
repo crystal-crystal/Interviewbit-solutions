@@ -1,0 +1,20 @@
+int Solution::solve(vector<int> &A, int B) {
+//problem is basically to find length of longest subarray with at most B 0's , which can be easily
+// done using two pointer technique
+int i = 0,j = 0;
+int res = INT_MIN;
+int ctr = 0;
+while(j<A.size()){  
+   if(A[j] == 0)
+     ctr++; 
+   if(ctr<=B)
+     res = max(res,j-i+1);
+   while(ctr > B){
+       if(A[i] == 0)
+          ctr--;
+       i++;
+   }
+    j++;
+}
+return res;
+}
