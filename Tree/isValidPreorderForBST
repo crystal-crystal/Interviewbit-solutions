@@ -1,0 +1,22 @@
+
+//You are given a preorder traversal A, of a Binary Search Tree.
+
+//Find if it is a valid preorder traversal of a BST.
+
+//Note: Binary Search Tree by definition has distinct keys and duplicates in binary search tree are not allowed.
+
+void isValidPreorder(vector<int>& A, int& idx, int root,int low, int high,int n){
+    if(idx >= n )
+    return ;
+    if(root > low && root < high){
+        idx = idx +1;
+        isValidPreorder(A,idx,A[idx],low,root,n);  
+        isValidPreorder(A,idx,A[idx],root,high,n);          
+    }
+}
+
+int Solution::solve(vector<int> &A) {
+int index = 0;
+isValidPreorder(A,index,A[0],INT_MIN,INT_MAX,A.size());
+return index == n;
+}
