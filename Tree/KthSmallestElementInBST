@@ -1,0 +1,32 @@
+/**
+ * Definition for binary tree
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+
+//Idea is to use the fact that inorder traversal of BST gives sorted output 
+// T(n) = O(n)
+// S(n) = O(n) worst case when BST is skewed
+
+
+ void inorder(TreeNode* A,int& k,int& ans){
+     if(!A)
+     return;
+     inorder(A->left,k,ans);
+     k--;
+     if(k == 0)
+      {
+          ans = A->val;
+          return;
+      }
+      inorder(A->right,k,ans);
+ }
+int Solution::kthsmallest(TreeNode* A, int B) {
+int ans = 0;
+inorder(A,B,ans);
+return ans;
+}
