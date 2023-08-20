@@ -1,0 +1,48 @@
+/**
+ * Definition for binary tree
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+
+//Idea is to store inorder traversal in array and maintaining a counter to keep track of last kth smallest element referred , this is doen to 
+// ensure O(1) time complexity for next() and hasNext() 
+
+vector<int> nodes;
+int ctr = 0;
+BSTIterator::BSTIterator(TreeNode *root){
+//performing iterative inorder traversal
+TreeNode* curr = root;
+stack<TreeNode*> st;
+while(curr || !st.empty()){
+    while(curr){
+      st.push(curr);
+      curr = curr->left;  
+    }
+   curr = st.top();
+   st.pop();
+   nodes.push_back(curr->val);
+   curr = curr->right;
+}
+}
+
+/** @return whether we have a next smallest number */
+bool BSTIterator::hasNext() {
+  return ctr < nodes.size();
+}
+
+/** @return the next smallest number */
+int BSTIterator::next() {
+ if(!hasNext())
+ return -1;
+ return nodes[ctr++];
+}
+
+/**
+ * Your BSTIterator will be called like this:
+ * BSTIterator i = BSTIterator(root);
+ * while (i.hasNext()) cout << i.next();
+ */
